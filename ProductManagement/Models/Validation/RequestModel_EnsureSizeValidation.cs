@@ -10,8 +10,9 @@ namespace ProductManagement.Models.Validation
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             var requestModel = validationContext.ObjectInstance as RequestModel;
+            string[] sizeListArray = Constants.sizeAvailable.Split(",");
             if (requestModel != null && requestModel.size is not null) {
-                if (!requestModel.size.Contains("small") || !requestModel.size.Contains("medium")|| requestModel.size.Contains("large"))
+                if (! sizeListArray.Contains(requestModel.size))
                 {
                     return new ValidationResult("size should be either of small , medium or large");
                 }
